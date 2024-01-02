@@ -8,6 +8,11 @@ public class Page : MonoBehaviour
 	private Animator animator;
 
 	[SerializeField]
+	private string title;
+	[SerializeField]
+	private string subTitle;
+
+	[SerializeField]
 	private List<Button> buttons;
 
 	private void Awake()
@@ -56,6 +61,8 @@ public class Page : MonoBehaviour
 
 	#endregion
 
+	#region Manage Buttons
+
 	public void EnableButtons()
 	{
 		buttons.ForEach(btn => btn.interactable = true);
@@ -86,6 +93,8 @@ public class Page : MonoBehaviour
 		}
 	}
 
+	#endregion
+
 	#region Utils
 
 	private void SetAsInvisible(Graphic graphic)
@@ -98,6 +107,15 @@ public class Page : MonoBehaviour
 	{
 		Color originalColor = graphic.color;
 		graphic.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+	}
+
+	public Dictionary<string, string> GetTitles()
+	{
+		return new Dictionary<string, string>()
+		{
+			{ "Title", title.ToUpper()},
+			{ "SubTitle", subTitle},
+		};
 	}
 
 	#endregion

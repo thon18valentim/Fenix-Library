@@ -19,6 +19,7 @@ public class PageFlowController : MonoBehaviour
 	private int nextPageIndex;
 
 	public static PageFlowController Instance { get; private set; }
+	private SceneCore sceneCore;
 
 	private void Awake()
 	{
@@ -37,6 +38,9 @@ public class PageFlowController : MonoBehaviour
 
 		FowardPageButton.interactable = false;
 		BackwardPageButton.interactable = false;
+
+		sceneCore = SceneCore.Instance;
+		sceneCore.SetSceneTitles(Pages[currentPageIndex].GetTitles());
 	}
 
 	#region Controlls
@@ -88,6 +92,8 @@ public class PageFlowController : MonoBehaviour
 
 		SetCurrentPageInFrontOfScreen();
 
+		sceneCore.SetSceneTitles(Pages[currentPageIndex].GetTitles());
+
 		FowardPageButton.interactable = false;
 		BackwardPageButton.interactable = true;
 	}
@@ -118,6 +124,8 @@ public class PageFlowController : MonoBehaviour
 			lastPageIndex = lastPage - 1;
 			BackwardPageButton.interactable = true;
 		}
+
+		sceneCore.SetSceneTitles(Pages[currentPageIndex].GetTitles());
 
 		FowardPageButton.interactable = true;
 	}
